@@ -15,7 +15,8 @@ class MyApp extends StatelessWidget {
         home: Scaffold(
           appBar: AppBar(
             backgroundColor: Color.fromARGB(210,47, 59, 82),
-            title: Text('iCAP mobile device'),
+            title: Text('iCAP'),
+            centerTitle: true,
           ),
           body: HomePage(),
         ));
