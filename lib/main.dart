@@ -1,221 +1,60 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:icap_mobile_device/main.dart';
 
-void main() {
-  // debugPaintSizeEnabled =true; 輔助線
-  runApp(MyApp());
+import 'page/DeviceListPage.dart';
+
+void main() => runApp(new MaterialApp(
+      home: new DeviceListApp(),
+    ));
+
+class DeviceListApp extends StatefulWidget {
+  @override
+  _DeviceListAppState createState() => _DeviceListAppState();
 }
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Color.fromARGB(210,47, 59, 82),
-            title: Text('iCAP'),
-            centerTitle: true,
-          ),
-          body: HomePage(),
-        ));
-  }
-}
+class _DeviceListAppState extends State<DeviceListApp> {
+  int _currentIndex = 0;
 
-class HomePage extends StatelessWidget {
+  final pages = [HomePage()];
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: new BoxDecoration(
-        color: Color.fromARGB(255, 11, 23, 44)
+    return new Scaffold(
+      appBar: AppBar(
+        title: Text('iCAP Devices List'),
       ),
-      child: Center(
-        child: Table(
-          // border: TableBorder(
-          //     horizontalInside: BorderSide(width: 1,
-          //     color: Colors.blue,
-          //     style: BorderStyle.solid),
-          // ),
-          border: TableBorder.symmetric(
-              inside: BorderSide(width: 1, color: Color.fromARGB(210,47, 59, 82)),
-              outside: BorderSide(width: 1, color: Color.fromARGB(210,47, 59, 82))),
-          defaultColumnWidth: FixedColumnWidth(150),
-          defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-          columnWidths: const <int, TableColumnWidth>{
-            //設定每行的寬度
-            1: FixedColumnWidth(60.0),
-            2: FixedColumnWidth(80.0),
-            3: FixedColumnWidth(100.0),
-            4: FixedColumnWidth(100.0)
-          },
-          //設定表格樣式
-          // border: TableBorder.all(
-          //     color: Color.fromARGB(255, 255, 255, 255),
-          //     width: 2.0,
-          //     style: BorderStyle.solid),
-          children: <TableRow>[
-            TableRow(
-              decoration: BoxDecoration(color: Color.fromARGB(210,47, 59, 82)),
-              children: <Widget>[
-                Text('裝置名稱',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Color.fromARGB(250, 146, 164, 199)
-                  ),
-                ),
-                Text('條件',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Color.fromARGB(250, 146, 164, 199)
-                  ),
-                ),
-                Text('時間',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Color.fromARGB(250, 146, 164, 199)
-                  ),
-                ),
-                Text(''),
-              ],
-            ),
-            TableRow(
-              children: <Widget>[
-                Text('Test Device 1',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  color: Color.fromARGB(250, 146, 164, 199)
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              accountName: new Text(
+                "USER NAME",
+              ),
+              accountEmail: new Text(
+                "asd@gmail.com",
+              ),
+              currentAccountPicture: new CircleAvatar(
+                backgroundImage: new AssetImage("assets/images/logo.png"),
               ),
             ),
-                Text('MEM.Usage>10',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Color.fromARGB(250, 146, 164, 199)
-                  ),
-                ),
-                Text('weekend',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Color.fromARGB(250, 146, 164, 199)
-                  ),
-                ),
-                OutlinedButton(
-                  onPressed: () {},
-                  child: Text('解決',
-                      style: TextStyle(
-                          color: Color.fromARGB(250, 234, 241, 255)
-                      )),
-                  style: OutlinedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(252, 30, 135, 217),
-                    shape: StadiumBorder(),
-                  ),
-                ),
-              ],
-            ),
-            TableRow(
-              decoration: BoxDecoration(color: Color.fromARGB(210,47, 59, 82)),
-              children: <Widget>[
-                Text('Test Device 2',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Color.fromARGB(250, 146, 164, 199)
-                  ),
-                ),
-                Text('MEM.Usage>10',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Color.fromARGB(250, 146, 164, 199)
-                  ),
-                ),
-                Text('weekend',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Color.fromARGB(250, 146, 164, 199)
-                  ),
-                ),
-                OutlinedButton(
-                  onPressed: () {},
-                  child: Text('解決',
-                      style: TextStyle(
-                          color: Color.fromARGB(250, 234, 241, 255)
-                      )),
-                  style: OutlinedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(252, 30, 135, 217),
-                    shape: StadiumBorder(),
-                  ),
-                ),
-              ],
-            ),
-            TableRow(
-              children: <Widget>[
-                Text('Test Device 3',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Color.fromARGB(250, 146, 164, 199)
-                  ),
-                ),
-                Text('MEM.Usage>10',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Color.fromARGB(250, 146, 164, 199)
-                  ),
-                ),
-                Text('weekend',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Color.fromARGB(250, 146, 164, 199)
-                  ),
-                ),
-                OutlinedButton(
-                  onPressed: () {},
-                  child: Text('解決',
-                      style: TextStyle(
-                          color: Color.fromARGB(250, 234, 241, 255)
-                      )),
-                  style: OutlinedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(252, 30, 135, 217),
-                    shape: StadiumBorder(),
-                  ),
-                ),
-              ],
-            ),
-            TableRow(
-              decoration: BoxDecoration(color: Color.fromARGB(210,47, 59, 82)),
-              children: <Widget>[
-                Text('Test Device 4',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Color.fromARGB(250, 146, 164, 199)
-                  ),
-                ),
-                Text('MEM.Usage>10',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Color.fromARGB(250, 146, 164, 199)
-                  ),
-                ),
-                Text('weekend',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Color.fromARGB(250, 146, 164, 199)
-                  ),
-                ),
-                OutlinedButton(
-                  onPressed: () {},
-                  child: Text('解決',
-                      style: TextStyle(
-                      color: Color.fromARGB(250, 234, 241, 255)
-                  )),
-                  style: OutlinedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(252, 30, 135, 217),
-                  shape: StadiumBorder(),
-                  ),
-                ),
-              ],
+            ListTile(
+              // leading: new CircleAvatar(child: Icon(Icon.chrome_reader_mode)),
+              title: Text('iCAP Device List'),
+              onTap: () {
+                _onItemClick(0);
+              },
             ),
           ],
         ),
       ),
+      body: pages[_currentIndex],
     );
+  }
+
+  void _onItemClick(int index){
+    setState(() {
+      _currentIndex = index;
+      Navigator.of(context).pop();
+    });
   }
 }
