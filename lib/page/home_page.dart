@@ -4,7 +4,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text("首頁"),
+      child: Text("iCAP 首頁"),
     );
   }
 }
