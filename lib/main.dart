@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 
-// import 'account.dart';
-import './page/home_page.dart';
+import 'page/home_page.dart';
 import 'page/alarm_page.dart';
-import './page/device_page.dart';
-import './page/setting_pade.dart';
+import 'page/device_page.dart';
+import 'page/setting_pade.dart';
 
-void main() => runApp(
-      new MaterialApp(
-        home: new MyApp(),
+
+void main() => runApp(MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: MyApp(),
       ),
     );
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -25,6 +27,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    // getHttp();
     return new Scaffold(
       appBar: AppBar(
         title: Text('iCAP'),
@@ -105,7 +108,7 @@ class _MyAppState extends State<MyApp> {
                   color: Color.fromARGB(249, 187, 209, 252)
                 )),
               onTap: () {
-                _onItemClick(2);
+                _onItemClick(3);
               },
             ),
           ],
@@ -122,3 +125,4 @@ class _MyAppState extends State<MyApp> {
     });
   }
 }
+
