@@ -50,6 +50,7 @@ class _MyAppState extends State<MyApp> {
                   style: TextStyle(color: Color.fromARGB(250, 146, 164, 199))),
               //設定大頭照
               currentAccountPicture: new CircleAvatar(
+                backgroundImage: NetworkImage('https://i.epochtimes.com/assets/uploads/2021/08/id13156667-shutterstock_376153318-450x322.jpg'),
                 backgroundColor: Color.fromARGB(250, 146, 164, 199),
               ),
             ),
