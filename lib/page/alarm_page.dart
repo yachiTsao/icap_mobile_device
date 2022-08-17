@@ -3,6 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
+class AlarmPage extends StatefulWidget {
+  @override
+  _LoadingState createState() => _LoadingState();
+}
+
 Map<String, dynamic> data = {};
 var dataArray = [];
 
@@ -49,10 +54,8 @@ Future postData(removeData) async {
     // print(url);
     final result = await http.post(url);
     print(result.statusCode);
-    if (result.statusCode == 200) {
-      dataArray.remove(removeData);
-      print('remove item');
-    }
+    dataArray.remove(removeData);
+    print('remove item');
   } catch (e) {
     print('caught error : $e');
   }
@@ -71,11 +74,6 @@ void showMySnackBar(BuildContext context) {
       },
     ),
   ));
-}
-
-class AlarmPage extends StatefulWidget {
-  @override
-  _LoadingState createState() => _LoadingState();
 }
 
 class _LoadingState extends State<AlarmPage> {
