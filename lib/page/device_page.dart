@@ -10,14 +10,13 @@ class DevicePage extends StatefulWidget {
 Map<String, dynamic> deviceData = {};
 var deviceDataArray = [];
 
-void getDeivceData() async {
+void getDeviceData() async {
   try {
     String url =
         'http://10.204.16.110:3000/api/v1/devices?pageSize=1024&page=0&sortProperty=createdTime&sortOrder=DESC';
     final deviceListData = await http.get(url);
     Map DeviceListFromJson = jsonDecode(deviceListData.body);
     var deviceList = DeviceListFromJson['data']['list'];
-    // print('deviecelist: ${deviceList.toList()}');
 
     for (int i = 0; i < deviceList.length; i++) {
       String deviceId = deviceList[i]['id'];
@@ -47,7 +46,7 @@ class _LoadingDeviceState extends State<DevicePage> {
   @override
   void initState() {
     super.initState();
-    getDeivceData();
+    getDeviceData();
     print('initState');
   }
 

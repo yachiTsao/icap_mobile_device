@@ -3,59 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
-void showMySnackBar(BuildContext context) {
-  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    content: const Text('已解除裝置通知'),
-    backgroundColor: Color.fromARGB(255, 47, 59, 82),
-    duration: const Duration(seconds: 3),
-    action: SnackBarAction(
-      label: '復原',
-      textColor: Color.fromARGB(248, 123, 201, 247),
-      onPressed: () {
-        print('復原...');
-      },
-    ),
-  ));
-}
-
-class AlarmPage extends StatefulWidget {
-  @override
-  _LoadingState createState() => _LoadingState();
-}
-
 Map<String, dynamic> data = {};
 var dataArray = [];
 
-// void getData() async {
-//   // print('sta_data: ${data}');
-//   try {
-//     String url =
-//         'http://10.204.16.110:3000/api/v1/alarm/list?pageSize=1024&page=0&sortProperty=startTime&sortOrder=DESC&searchStatus=UNCLEARED';
-//     final deviceList =
-//         await http.get(url); // The type of deviceList is response
-//     Map alarmListFromJson = jsonDecode(deviceList
-//         .body); // The type of alarmListFromJson is Map<String, dynamic>
-//     var alarmList = alarmListFromJson['data']['list'];
-
-//     for (int i = 0; i < alarmList.length; i++) {
-//       String alarmId = alarmList[i]['alarmId'];
-//       String deviceName = alarmList[i]['device']['name'];
-//       String deviceDetail = alarmList[i]['details']['msg'];
-//       int deviceTimeData = alarmList[i]['startTime'];
-//       var deviceTime = DateTime.fromMillisecondsSinceEpoch(deviceTimeData);
-//       data = {
-//         'alarmId': alarmId,
-//         'deviceName': deviceName,
-//         'deviceDetail': deviceDetail,
-//         'deviceTime': deviceTime,
-//       };
-//       dataArray.add(data);
-//     }
-//     print('get data: ${dataArray}');
-//   } catch (e) {
-//     print('caught error : $e');
-//   }
-// }
 void initData() {
   data = {};
   dataArray = [];
@@ -99,56 +49,34 @@ Future postData(removeData) async {
     // print(url);
     final result = await http.post(url);
     print(result.statusCode);
-    dataArray.remove(removeData);
-    print('remove item');
-    // if (result.statusCode == 200) {
-    // removeAndLoadData(removeData);
-    // print('already remove data');
-    // itemBuilder(dataArray);
-    // print(itemBuilder(dataArray));
-    // }
+    if (result.statusCode == 200) {
+      dataArray.remove(removeData);
+      print('remove item');
+    }
   } catch (e) {
     print('caught error : $e');
   }
 }
 
-// void removeAndLoadData(removeData) {
-//   dataArray.remove(removeData);
-//   // data = {};
-//   // dataArray = [];
-//   // getData();
-//   print('rebuild alarm list: ${dataArray}');
-//   // print('already rebuild list');
-// }
+void showMySnackBar(BuildContext context) {
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    content: const Text('已解除裝置通知'),
+    backgroundColor: Color.fromARGB(255, 47, 59, 82),
+    duration: const Duration(seconds: 3),
+    action: SnackBarAction(
+      label: '復原',
+      textColor: Color.fromARGB(248, 123, 201, 247),
+      onPressed: () {
+        print('復原...');
+      },
+    ),
+  ));
+}
 
-// Widget itemBuilder(alarmData) {
-//   print('rebuild');
-//   return ListView.builder(
-//       itemCount: alarmData.length,
-//       itemBuilder: (context, index) {
-//         return ListTile(
-//             title: Text(
-//               '${alarmData[index]['deviceName']}',
-//               style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20.0),
-//             ),
-//             subtitle: Text(
-//                 '條件: ${alarmData[index]['deviceDetail']}\n時間: ${alarmData[index]['deviceTime']}'),
-//             leading: Icon(
-//               Icons.circle_notifications,
-//               color: Color.fromARGB(210, 47, 59, 82),
-//               size: 40.0,
-//             ),
-//             trailing: IconButton(
-//               icon: Icon(Icons.build_rounded,
-//                   color: Color.fromARGB(210, 47, 59, 82), size: 40.0),
-//               onPressed: () {
-//                 postData(alarmData[index]);
-//                 showMySnackBar(context);
-//                 print('resolve button');
-//               },
-//             ));
-//       });
-// }
+class AlarmPage extends StatefulWidget {
+  @override
+  _LoadingState createState() => _LoadingState();
+}
 
 class _LoadingState extends State<AlarmPage> {
   int _count = 0;

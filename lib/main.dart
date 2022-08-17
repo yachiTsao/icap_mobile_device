@@ -7,7 +7,7 @@ import 'page/setting_pade.dart';
 
 void main() => runApp(
       MaterialApp(
-        debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: false, //右上標籤
         home: MyApp(),
       ),
     );
