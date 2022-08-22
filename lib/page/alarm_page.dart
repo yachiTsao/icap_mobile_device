@@ -65,7 +65,7 @@ void showMySnackBar(BuildContext context) {
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
     content: const Text('已解除裝置通知'),
     backgroundColor: Color.fromARGB(255, 47, 59, 82),
-    duration: const Duration(seconds: 3),
+    duration: const Duration(seconds: 2),
     action: SnackBarAction(
       label: '復原',
       textColor: Color.fromARGB(248, 123, 201, 247),
@@ -109,7 +109,7 @@ class _LoadingState extends State<AlarmPage> {
       style: Theme.of(context).textTheme.headline2!,
       textAlign: TextAlign.center,
       child: FutureBuilder<List<dynamic>>(
-        future: _calculation, // a previously-obtained Future<String> or null
+        future: _calculation, 
         builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
           List<Widget> children;
           if (snapshot.connectionState == ConnectionState.done) {
@@ -127,34 +127,42 @@ class _LoadingState extends State<AlarmPage> {
               );
             }
             snapshot = AsyncSnapshot.withData(ConnectionState.done, dataArray);
-            print('after if ${snapshot.requireData.length}');
-            // return itemBuilder(snapshot.requireData);
-            return ListView.builder(
-                itemCount: snapshot.requireData.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                      title: Text(
-                        '${snapshot.requireData[index]['deviceName']}',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 20.0),
-                      ),
-                      subtitle: Text(
-                          '條件: ${snapshot.requireData[index]['deviceDetail']}\n時間: ${snapshot.requireData[index]['deviceTime']}'),
-                      leading: Icon(
-                        Icons.circle_notifications,
-                        color: Color.fromARGB(210, 47, 59, 82),
-                        size: 40.0,
-                      ),
-                      trailing: IconButton(
-                        icon: Icon(Icons.build_rounded,
-                            color: Color.fromARGB(210, 47, 59, 82), size: 40.0),
-                        onPressed: () async {
-                          print('resolve button');
-                          await postData(snapshot.requireData[index]); //remove
-                          showMySnackBar(context);
-                          _reBuiltList();
-                        },
-                      ));
+            return RefreshIndicator( //由上往下刷 refesh
+                child: ListView.builder(
+                    itemCount: snapshot.requireData.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                          title: Text(
+                            '${snapshot.requireData[index]['deviceName']}',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600, fontSize: 20.0),
+                          ),
+                          subtitle: Text(
+                              '條件: ${snapshot.requireData[index]['deviceDetail']}\n時間: ${snapshot.requireData[index]['deviceTime']}'),
+                          leading: Icon(
+                            Icons.circle_notifications,
+                            color: Color.fromARGB(210, 47, 59, 82),
+                            size: 40.0,
+                          ),
+                          trailing: IconButton(
+                            icon: Icon(Icons.build_rounded,
+                                color: Color.fromARGB(210, 47, 59, 82),
+                                size: 40.0),
+                            onPressed: () async {
+                              print('resolve button');
+                              await postData(
+                                  snapshot.requireData[index]); //remove
+                              showMySnackBar(context);
+                              _reBuiltList();
+                            },
+                          ));
+                    }),
+                onRefresh: () async {
+                  return Future.delayed(Duration(seconds: 2), () {
+                    setState(() {
+                      _reBuiltList();
+                    });
+                  });
                 });
           } else if (snapshot.hasError) {
             children = <Widget>[
