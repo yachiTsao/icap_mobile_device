@@ -186,7 +186,7 @@ class _LoadingState extends State<AlarmPage> {
               Padding(
                   padding: EdgeInsets.only(top: 16),
                   child: Text(
-                    '通知列表載入中...',
+                    '警報列表載入中...',
                     style: TextStyle(fontSize: 40),
                   ))
             ];

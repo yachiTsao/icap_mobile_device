@@ -71,7 +71,7 @@ class _MyAppState extends State<MyApp> {
                   child: Icon(Icons.notifications_active_rounded,
                       color: Color.fromARGB(249, 187, 209, 252)),
                   backgroundColor: Color.fromARGB(210, 47, 59, 82)),
-              title: Text('通知列表',
+              title: Text('警報列表',
                   style: TextStyle(color: Color.fromARGB(249, 187, 209, 252))),
               onTap: () {
                 _onItemClick(1);
